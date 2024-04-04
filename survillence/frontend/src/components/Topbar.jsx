@@ -1,10 +1,15 @@
-// Topbar.js
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux'; // Import useSelector hook
 import { IoMdPerson } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 
-const Topbar = ({ username }) => {
+const Topbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+ 
+  // Use useSelector to access the Redux store
+  const userName = useSelector(state => state.user.personalDetails?.userName || 'User');
+
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -14,9 +19,9 @@ const Topbar = ({ username }) => {
     <div className="bg-[#071E3D] text-white flex justify-end items-center px-4 py-2">
       <div className="relative">
         <button onClick={toggleDropdown} className="flex items-center focus:outline-none">
-          <span className="ml-2">{username}</span>
+          {/* Display the first name next to the account icon */}
+          <span className="ml-2">Hello, {userName}</span> 
           <IoMdPerson className="text-2xl ml-3" />
-
         </button>
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">

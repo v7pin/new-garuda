@@ -3,6 +3,7 @@ import { IoArrowBackCircle, IoNotifications, IoWarning } from "react-icons/io5";
 import axios from "axios";
 import moment from "moment-timezone";
 import CameraLogs from "./CameraLogs";
+import { useSelector } from 'react-redux';
 
 const LiveVideoFeed = ({ setActiveComponent, reportLocation }) => {
     const videoRef = useRef(null);
@@ -13,6 +14,8 @@ const LiveVideoFeed = ({ setActiveComponent, reportLocation }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [currentTime, setCurrentTime] = useState(moment().tz("Asia/Kolkata"));
     const [newReports, setNewReports] = useState([]);
+
+
 
 
     useEffect(() => {
@@ -96,9 +99,12 @@ const handleNewReport = (crimeType) => {
     setNewReports([...newReports, newReport]);
 };
 
+
+
+
+
 const reportCrimeAndLocation = async () => {
-    // This would typically involve communication with your backend to get the crime type
-    // For the purposes of this example, we're using a hardcoded crime type
+    
     const crimeType = 'Robbery'; // Replace with actual data from backend
 
     // You can pass additional data such as location or video evidence if needed

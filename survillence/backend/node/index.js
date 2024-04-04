@@ -1,22 +1,29 @@
 const express = require("express");
+const UserModel = require("./database/db");
+const mongoose = require("mongoose");
+const router = require('./routes/upload');
 const cors = require("cors");
-const router = require('./route/upload');
-const MainRouter = require("./route/index");
+const { Userroute }=require("./routes/User");
+
 
 const app = express();
-app.use(cors());
-// Middleware to parse JSON bodies
+
+
+// Allow requests from specific origin with credentials
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+
+
+// const jwtSign = util.promisify(jwt.sign);
+
 app.use(express.json());
 
-// Custom middleware function to log requests
-function check(req, res, next) {
-    console.log("Logging request in check middleware...");
-    next();
-}
-
-// Mount MainRouter under "/api/v1" path
-app.use("/api/v1", check, MainRouter);
+app.get("/", (req, res) => {
+    res.send("hi");
+});
 app.use('/api/', router);
-app.listen(3000);
+app.use("/api/",Userroute);
 
-
+app.listen(3000, () => {
+    console.log("Server is running on port 3000");
+});

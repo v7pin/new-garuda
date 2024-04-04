@@ -10,6 +10,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         role: action.payload,
       };
+      case 'SET_PERSONAL_DETAILS': // Handle the new action
+      return {
+        ...state,
+        personalDetails: action.payload,
+      };
     default:
       return state;
   }
