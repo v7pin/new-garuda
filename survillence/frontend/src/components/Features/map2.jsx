@@ -1,14 +1,14 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { IoArrowBackCircle } from "react-icons/io5";
+import { IoArrowBackCircle, IoAlertCircle } from "react-icons/io5";
 import L from "leaflet";
+import "./AlertsOnMap.css"; // Assuming you'll create this CSS file for animations
 
-// Assuming the images are correctly placed in the `public/images/leaflet` directory
 const customMarkerIcon = new L.Icon({
-  iconUrl: "/images/leaflet/marker-icon.png",
-  iconRetinaUrl: "/images/leaflet/marker-icon-2x.png",
-  shadowUrl: "/images/leaflet/marker-shadow.png",
+  iconUrl: "marker-icon.png",
+  iconRetinaUrl: "marker-icon-2x.png",
+  shadowUrl: "marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -22,13 +22,21 @@ const AlertsOnMap = ({ setActiveComponent, alertLocation }) => {
 
   return (
     <div className="relative h-screen w-full">
-      <button
-        onClick={() => setActiveComponent("")}
-        className="absolute z-10 top-5 left-5 flex items-center text-lg font-semibold text-blue-700 hover:text-blue-900 bg-slate-200 hover:bg-blue-200 rounded-full shadow-md transition duration-300 ease-in-out p-2"
-      >
-        <IoArrowBackCircle className="mr-2" />
-        <span className="hidden sm:inline">Back</span>
-      </button>
+      <div className="absolute z-20 top-5 left-5">
+        <button
+          onClick={() => setActiveComponent("")}
+          className="flex items-center text-lg font-semibold text-blue-700 hover:text-blue-900 bg-slate-200 hover:bg-blue-200 rounded-full shadow-md transition duration-300 ease-in-out p-2"
+        >
+          <IoArrowBackCircle className="mr-2" />
+          <span className="hidden sm:inline">Back</span>
+        </button>
+      </div>
+      <div className="absolute z-20 top-5 right-5 flex items-center">
+        <h2 className="text-xl font-bold text-white bg-gray-800 p-3 rounded-lg">Alert Location</h2>
+        {alertLocation && (
+          <IoAlertCircle className="text-4xl text-red-600 animate-pulse ml-4" />
+        )}
+      </div>
       <MapContainer
         center={position}
         zoom={5}
@@ -40,10 +48,7 @@ const AlertsOnMap = ({ setActiveComponent, alertLocation }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {alertLocation && (
-          <Marker
-            position={position}
-            icon={customMarkerIcon}
-          >
+          <Marker position={position} icon={customMarkerIcon}>
             <Popup>A danger alert has been reported here.</Popup>
           </Marker>
         )}

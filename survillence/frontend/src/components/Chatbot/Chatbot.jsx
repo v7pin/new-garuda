@@ -38,7 +38,7 @@ const Chatbot = () => {
       <CSSTransition in={isVisible} timeout={300} classNames="chat-interface" unmountOnExit>
         <div className="chatBot fixed inset-0 m-auto w-11/12 max-w-4xl h-3/4 bg-white rounded-lg shadow-lg flex flex-col">
           <div className="p-4 bg-blue-700 rounded-t-lg flex justify-between items-center text-white">
-            <h2 className="text-lg">Chatbot</h2>
+            <h2 className="text-lg">Garuda AI: Your Assistance</h2>
             <div className="flex items-center">
               <select
                 id="language"

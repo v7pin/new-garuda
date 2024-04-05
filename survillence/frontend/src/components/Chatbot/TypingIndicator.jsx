@@ -9,7 +9,7 @@ const TypingIndicator = () => {
       <div className="dot1 mr-1 mb-1"></div>
       <div className="dot2 mr-1 mb-1"></div>
       <div className="dot3 mb-1"></div>
-      <div className="ml-2">bhoomi is typing...</div>
+      <div className="ml-2">Garuda AI is typing...</div>
     </div>
   );
 };

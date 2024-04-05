@@ -5,6 +5,7 @@ const FormData = require('form-data');
 const auth = require('basic-auth');
 const fs = require('fs');
 const { Web3 } = require('web3');
+const {NumberModel}= require ("../database/db")
 
 require('dotenv').config();
 const FileStorageContract = require('../build/contracts/FileStorage.json');
@@ -77,8 +78,27 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     // console.log(description);
     const transaction = await fileStorageContract.methods.addFile(ipfsHash,coordinates,description)
       .send({ from: accounts[0], gas: 500000 });
+      NumberModel.findOne({_id:"660fa48277ff84bb9e60688f"}).then(function (response) {
+        if (!response) {
+          const initialNumber = new NumberModel({ value: 28 });
+          initialNumber.save()
+            .then(() => {
+              console.log('Initial number saved successfully!');
+            })
+            .catch((error) => {
+              console.error('Error saving initial number:', error);
+            });
+        }
+      });
+     
+
+      const updatedNumber = await NumberModel.findOneAndUpdate(
+        {_id:"660fa48277ff84bb9e60688f"}, // Empty filter to update the first matching document (if any)
+        { $inc: { value: 1 } }, // Increment the 'value' field by 1
+        { new: true } // Return the updated document after update
+      );
     // console.log(transaction);
-    res.json({ ipfsHash });
+    res.json({ ipfsHash , blockNum:updatedNumber.value});
   } catch (error) {
     console.error('Error uploading file:', error.message);
     res.status(500).json({ error: 'Internal server error' });

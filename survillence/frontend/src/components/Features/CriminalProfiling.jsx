@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
-import { IoArrowBackCircle, IoCloudUploadOutline, IoClose } from 'react-icons/io5';
+import { IoArrowBackCircle, IoCloudUploadOutline, IoClose,IoCheckmarkCircle } from 'react-icons/io5';
 import axios from 'axios';
+import './CriminalProfiling.css'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from "react-redux";
+
 
 const CriminalProfiling = ({ setActiveComponent }) => {
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
   const [coordinates, setCoordinates] = useState("");
+  const [blockNum, setBlockNum] = useState(null);
+
+  const navigate = useNavigate();
+
+  const personalDetails = useSelector(state => state.user.personalDetails);
+
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -21,6 +33,11 @@ const CriminalProfiling = ({ setActiveComponent }) => {
   };
 
   const submitReport = async () => {
+
+    setLoading(true); // Start loading before the API call
+  setShowModal(false);
+
+
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -34,20 +51,34 @@ const CriminalProfiling = ({ setActiveComponent }) => {
       });
 
       console.log("Report submitted:", response.data);
+
       alert("Your report has been submitted. Thank you for contributing!");
-      setShowModal(false);
-      setFile(null);
-      setDescription("");
-      setCoordinates("");
+      setFile(null); // Clear the file state
+    setDescription(""); // Clear the description state
+    setCoordinates(""); // Clear the coordinates state
+    setBlockNum(response.data.blockNum); // Save the block number from the response
+    setShowConfirmation(true);
     } catch (error) {
       console.error('Error submitting report:', error.message);
       alert("Failed to submit report. Please try again later.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
+  const goToGetYourVideo = () => {
+    navigate('/get-your-video'); // Use the path you've defined in your routing configuration
+  };
+
+  const handleBackFromConfirmation = () => {
+    setShowConfirmation(false); // Close the confirmation modal
+    // Additional back logic if necessary
+  };
+  
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-10">
-      <div className="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+<div className={`min-h-screen bg-gray-100 flex flex-col items-center justify-center py-10 ${showConfirmation ? '' : 'relative'}`}>
+        <div className="w-full max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
         <button 
           onClick={() => setActiveComponent("")} 
           className="absolute top-5 left-5 flex items-center text-lg font-semibold text-blue-700 hover:text-blue-800 transition duration-300 ease-in-out">
@@ -81,7 +112,7 @@ const CriminalProfiling = ({ setActiveComponent }) => {
                 value={description}
                 onChange={handleDescriptionChange}
                 className="w-full p-2 border rounded mb-4"
-                placeholder="Describe the incident"
+                placeholder="Describe the incident with your Phone Number"
                 rows="4"></textarea>
               <input
                 value={coordinates}
@@ -98,6 +129,32 @@ const CriminalProfiling = ({ setActiveComponent }) => {
             </div>
           </div>
         )}
+       {/* Show loader */}
+       {loading && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center">
+            <div className="loader"></div>
+          </div>
+        )}
+
+    {/* Overlay */}
+    {showConfirmation && (
+        <div className="overlay"></div>
+      )}
+
+{showConfirmation && (
+        <div className="confirmation-modal">
+          <button onClick={handleBackFromConfirmation} className="close-button">
+            <IoClose size={24} /> {/* Using IoClose for the close icon */}
+          </button>
+          <IoCheckmarkCircle className="text-green-500 text-6xl" />
+          <h3>Successfully Secured Your Block</h3>
+          <p className='font-bold'>Block ID: {blockNum}</p>
+          <button onClick={goToGetYourVideo} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mb-4">
+            Explore Your Video
+          </button>
+        </div>
+      )} 
+
 
         <p className="text-center mt-4">
           Your contribution matters. By submitting a report, you help in maintaining a safer environment for everyone. Thank you for being proactive in ensuring the safety of our community.

@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 mongoose.connect("mongodb+srv://agro-admin:agro-123@vedant.jfvpwaf.mongodb.net/cctv-servilance");
 
+
+// Create and save an instance of NumberModel
+
 const userSchema = new mongoose.Schema({
     Useremail: { type: String, unique: true, required: true },
     Username: { type: String, unique: true, required: true },
@@ -39,4 +42,14 @@ const surveillanceSchema = new mongoose.Schema({
 
 const ServilanceUser = mongoose.model('surveillanceUser', surveillanceSchema);
 
-module.exports = { UserModel, ServilanceUser };
+const NumberSchema = new mongoose.Schema({
+    value: {
+      type: Number,
+      required: true,
+      default: 25 // Initial value of the number
+    }
+  });
+
+  const NumberModel = mongoose.model('Number', NumberSchema);
+
+module.exports = { UserModel, ServilanceUser ,NumberModel};

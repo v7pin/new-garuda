@@ -62,6 +62,7 @@ const SignupPage = () => {
   return (
     <div className="flex min-h-screen items-center justify-center"
          style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}>
+          
       <img src={cctvimg} alt="CCTV Camera" className="absolute left-0 top-0 w-64 animate-moveCCTV" />
       <div className="absolute top-0 right-0 mt-2 mr-4 text-xs">
         <select className="bg-transparent w-full backdrop-blur-2xl text-white rounded p-2 ">

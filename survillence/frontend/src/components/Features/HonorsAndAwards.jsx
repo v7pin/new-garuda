@@ -27,55 +27,56 @@ const HonorsandAwards = ({ setActiveComponent }) => {
       title: "Delhi's New Sentinel: How Garuda is Redefining Safety",
       content: "Delhi's citizens sleep more soundly as Garuda's vigilant AI patrols the night, proving that technology can be humanity's ally in the quest for peace."
     },
-    // ...more articles if needed
+    
   ];
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pt-8 lg:pt-16">
-      <button
-        onClick={() => setActiveComponent("")}
-        className="absolute top-4 left-4 lg:top-8 lg:left-8 text-lg font-semibold text-blue-700 hover:text-blue-900"
-      >
-        <IoArrowBackCircle className="mr-2" size={24} />
-        Back
-      </button>
-      <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex flex-wrap gap-8 justify-center">
-          {/* Awards Section */}
-          <div className="w-full lg:w-1/2 xl:w-1/3 bg-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4 border-b pb-4 flex items-center justify-center">
-              <IoMedal className="text-yellow-400 mr-2" size={30} />
-              Honors and Awards
-            </h2>
+
+      <div className="text-center mb-2">
+        <h1 className="text-5xl font-bold text-blue-800 mb-3">Honors & Awards</h1>
+        <p className="max-w-2xl text-xl text-gray-600">Celebrating the achievements and contributions of our vigilant community members.</p>
+      </div>
+
+      {/* Awards & Articles Container */}
+      <div className="w-full max-w-7xl mx-auto px-4 lg:px-8 grid md:grid-cols-2 gap-8">
+        {/* Awards Section */}
+        <section className="bg-white p-8 rounded-xl shadow-lg">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6 flex items-center justify-center">
+            <IoMedal className="text-yellow-400 mr-3" size={32} />
+            Honors Roll
+          </h2>
+          <div className="grid grid-cols-1 gap-6">
             {awards.map((award) => (
-              <div key={award.id} className="flex items-center bg-gray-50 p-4 mb-4 rounded-lg shadow-sm">
-                <IoMedal className="text-yellow-400 mr-3" size={24} />
-                <div>
-                  <h3 className="font-semibold">{award.user}</h3>
-                  <p className="text-sm text-gray-600">{award.date}</p>
-                  <span className="text-green-600">{award.award}</span>
+              <div key={award.id} className="bg-gray-50 p-6 rounded-lg shadow hover:shadow-md transition-shadow duration-300 ease-in-out">
+                <div className="flex items-center">
+                  <IoRibbon className="text-yellow-500 mr-4" size={24} />
+                  <div>
+                    <h3 className="font-semibold">{award.user}</h3>
+                    <p className="text-sm text-gray-500">{award.date}</p>
+                  </div>
                 </div>
+                <h4 className="mt-2 text-lg text-green-600">{award.award}</h4>
               </div>
             ))}
           </div>
+        </section>
 
-          {/* Articles Section */}
-          <div className="w-full lg:w-1/2 xl:w-1/3 bg-white p-6 rounded-lg shadow">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4 border-b pb-4 flex items-center justify-center">
-              <IoNewspaperOutline className="mr-2" size={30} />
-              In The News
-            </h2>
+        {/* Articles Section */}
+        <section className="bg-white p-8 rounded-xl shadow-lg">
+          <h2 className="text-3xl font-bold text-blue-800 mb-6 flex items-center justify-center">
+            <IoNewspaperOutline className="mr-3" size={32} />
+            Featured Articles
+          </h2>
+          <div className="space-y-6">
             {articles.map((article) => (
-              <article key={article.id} className="mb-4 p-4 bg-gray-50 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold mb-2 text-blue-800 flex items-center">
-                  <IoNewspaperOutline className="mr-2" size={20} />
-                  {article.title}
-                </h3>
-                <p className="text-sm text-gray-700">{article.content}</p>
+              <article key={article.id} className="p-6 bg-gray-50 rounded-lg shadow hover:shadow-md transition-shadow duration-300 ease-in-out">
+                <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
+                <p className="text-gray-700">{article.content}</p>
               </article>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

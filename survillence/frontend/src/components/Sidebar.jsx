@@ -26,8 +26,9 @@ const Sidebar = ({ isOpen, toggle, setActiveComponent, activeComponent }) => {
       }`}
     >
       <div className="flex flex-col justify-between h-full">
-        <div className="py-4 flex flex-col items-center justify-center">
+        <div className="py-4 flex flex-col items-center justify-center cursor-pointer">
           <img
+           onClick={() => setActiveComponent("")}
             src="logo.png"
             alt="Logo"
             className="duration-300 ease-in-out w-24 h-24"

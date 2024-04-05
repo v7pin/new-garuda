@@ -8,3 +8,9 @@ export const setPersonalDetails = (details) => ({
   type: 'SET_PERSONAL_DETAILS',
   payload: details,
 });
+
+
+export const addCrimeReport = (report) => ({
+  type: 'ADD_CRIME_REPORT',
+  payload: report,
+});

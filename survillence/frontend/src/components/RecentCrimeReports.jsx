@@ -1,10 +1,11 @@
 // RecentCrimesReported.js
-import React from 'react';
-import { FaRegClock } from 'react-icons/fa'; // Make sure react-icons is installed
+import React from "react";
+import { FaRegClock } from "react-icons/fa"; // Make sure react-icons is installed
 
 const crimesReported = [
-  { time: '32 min', title: 'Robbery Detected at Chandni Chowk, Delhi' },
-  { time: '56 min', title: 'Vandalism Detected at Koregaon Park, Pune' },
+  { time: "56 min", title: "Vandalism Detected at Koregaon Park, Pune" },
+  { time: "15 min", title: "Suspicious Activity Detected in Nagpur" },
+  { time: "10 min", title: "Assualt Case Found in Goa" },
   // Add more reports here...
 ];
 
@@ -21,7 +22,9 @@ const RecentCrimesReported = () => {
             <FaRegClock className="text-blue-500" />
             <div className="ml-2">
               <span className="text-sm text-gray-600">{crime.time}</span>
-              <p className="text-md font-semibold text-gray-800">{crime.title}</p>
+              <p className="text-md font-semibold text-gray-800">
+                {crime.title}
+              </p>
             </div>
           </div>
         ))}

@@ -1,30 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { IoCalendarClear, IoTime, IoAlertCircle } from "react-icons/io5";
 import moment from "moment-timezone";
 
-const hardcodedLogs = [
-    { date: "2024-04-01", time: "12:00", type: 'Arson', reported: true },
-    { date: "2024-04-02", time: "15:30", type: 'Robbery', reported: true },
-    { date: "2024-04-03", time: "17:45", type: 'Vandalism', reported: true },
-    // ...any other hardcoded logs
-];
-
-const CameraLogs = ({ newReports }) => {
-    const [logs, setLogs] = useState(hardcodedLogs);
-
-    useEffect(() => {
-        if (newReports) {
-            setLogs(prevLogs => [...prevLogs, ...newReports]);
-        }
-    }, [newReports]);
+const CameraLogs = () => {
+    // Select logs from the Redux store
+    const logs = useSelector(state => state.crime.logs);
 
     return (
         <div className="h-full overflow-y-auto">
             {logs.map((log, index) => (
-                <div key={index} className="p-4 border-b border-gray-300">
+                <div key={index} className="p-4 border-b border-gray-300 flex flex-col">
                     <div className="flex items-center mb-1">
                         <IoCalendarClear className="text-gray-600 mr-2" />
-                        <span>{log.date}</span>
+                        <span>{moment(log.date).format("YYYY-MM-DD")}</span>
                     </div>
                     <div className="flex items-center mb-1">
                         <IoTime className="text-gray-600 mr-2" />

@@ -1,0 +1,51 @@
+.alert-map-container {
+  position: relative;
+  height: 60vh; /* Adjust based on your preference */
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.map-small {
+  height: 100%;
+  width: 100%;
+}
+
+/* Additional styles for the new elements */
+.absolute.z-10 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.alert-map-container {
+  position: relative;
+  height: 60vh; /* Adjust based on your preference */
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.map-small {
+  margin-top: 5rem;
+  height: 100%;
+  width: 100%;
+}
+
+/* Additional styles for the new elements */
+.absolute.z-10 {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.map-heading-container {
+  text-align: center;
+  margin-bottom: 1rem; /* Space between the heading and the map */
+}
+
+.map-heading {
+  font-size: 1.5rem; /* Large font for heading */
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Space between the heading and the information text */
+}
+
+.map-info {
+  font-size: 1rem;
+  color: #555; /* Subdued text color for the explanatory text */
+}
