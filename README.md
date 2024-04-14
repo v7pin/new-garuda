@@ -28,16 +28,16 @@ Garuda enhances urban public safety through a real-time surveillance web applica
 4. Run the Application
 npm start
 
-Libraries and Dependencies Required
+## Libraries and Dependencies Required
 Node.js and npm (Node package manager)
 React.js libraries: Axios, Redux for state management
 Express.js as the server framework
 TensorFlow and OpenCV for AI models
 Web3.js for interacting with Ethereum blockchain
 
-Declaration of Previous/Adapted Work
+## Declaration of Previous/Adapted Work
 This project is an adaptation and continuation of previous work conducted in the domain of public safety surveillance. Previous implementations focused primarily on manual monitoring and lacked real-time processing capabilities. The last 28 hours have been dedicated to integrating real-time crime detection technology and blockchain for secure criminal profiling.
 
-Overview Video Link
+## Overview Video Link
 Garuda Overview Video
 
